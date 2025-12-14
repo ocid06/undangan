@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Wedding Of OcID & Ulan</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #c9a24d;
+      --dark: #222;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background: #fff;
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+    .center { text-align: center; }
+
+    /* Opening */
+    #opening {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      transition: all .8s ease;
+    }
+    #opening.hide { opacity: 0; pointer-events: none; }
+
+    #opening h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: var(--gold);
+      margin: .5rem 0;
+    }
+    #opening p { margin: .3rem 0; }
+
+    button {
+      margin-top: 1.5rem;
+      padding: .8rem 1.6rem;
+      border: none;
+      background: var(--gold);
+      color: #fff;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 4rem 1.5rem;
+    }
+
+    .names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: var(--gold);
+    }
+
+    .card {
+      max-width: 500px;
+      margin: 1.5rem auto;
+      padding: 1.5rem;
+      border: 1px solid #eee;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.05);
+    }
+
+    footer {
+      padding: 3rem 1rem;
+      background: #fafafa;
+    }
+
+    .mute {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--gold);
+      color: #fff;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Opening Screen -->
+  <div id="opening" class="center">
+    <p>The Wedding Of</p>
+    <h1>OcID & Ulan</h1>
+    <p>Kepada Yth.</p>
+    <p><strong id="guest">Tamu Undangan</strong></p>
+    <button onclick="openInvitation()">Buka Undangan</button>
+  </div>
+
+  <!-- Music -->
+  <audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="mute" onclick="toggleMusic()">♪</div>
+
+  <!-- Content -->
+  <section class="center" data-aos="fade-up">
+    <div class="names">OcID</div>
+    <p>&</p>
+    <div class="names">Ulan</div>
+  </section>
+
+  <section class="center" data-aos="fade-up">
+    <p>Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
+    <p>Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan kami.</p>
+  </section>
+
+  <section data-aos="fade-up">
+    <div class="card center">
+      <h3>Akad Nikah</h3>
+      <p>Hari, Tanggal</p>
+      <p>Pukul</p>
+    </div>
+    <div class="card center">
+      <h3>Resepsi</h3>
+      <p>Hari, Tanggal</p>
+      <p>Pukul</p>
+    </div>
+  </section>
+
+  <footer class="center" data-aos="fade-up">
+    <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
+    <div class="names">OcID & Ulan</div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, duration: 1000 });
+
+    const params = new URLSearchParams(window.location.search);
+    const to = params.get('to');
+    if (to) document.getElementById('guest').innerText = to;
+
+    const music = document.getElementById('music');
+    function openInvitation() {
+      document.getElementById('opening').classList.add('hide');
+      music.play();
+    }
+    function toggleMusic() {
+      if (music.paused) music.play(); else music.pause();
+    }
+  </script>
+</body>
+  </html>
